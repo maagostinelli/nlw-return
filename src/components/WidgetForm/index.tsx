@@ -5,6 +5,7 @@ import ideaImageUrl from '../../assets/idea.svg';
 import thoughtImageUrl from '../../assets/thought.svg';
 import { FeedbackTypeStep } from "./Steps/FeedbackTypeStep";
 import { FeedbackContentStep } from "./Steps/FeedbackContentStep";
+import { FeedbackSuccessStep } from "./Steps/FeedbackSuccessStep";
 
 export const feedbackTypes = {
     BUG:{
@@ -41,22 +42,35 @@ export const feedbackTypes = {
 export type FeedbackType = keyof typeof feedbackTypes; //do typescript ->"cria" os valores q o FeedbackType pode receber (as keys)
 
 export function WidgetForm() {
-    const [feedbackType, setFeedbackType] = useState<FeedbackType|null>(null)
+    const [feedbackType, setFeedbackType] = useState<FeedbackType|null>(null);
+    const [feedbackSent, setFeedbackSent] = useState(false);
 
     function handleRestartFeedback() {
+        setFeedbackSent(false);
         setFeedbackType(null);
     }
 
     return (
         <div className="bg-darkSurfacePrimary-500 p-4 relative  rounded-2xl mb-2 flex flex-col items-center w-[calc(100vw-2rem)] md:w-auto">
 
-            {!feedbackType ? (
-                <FeedbackTypeStep  onFeedbackTypeChanged={setFeedbackType}/>
+            
+            { feedbackSent ? (
+                <FeedbackSuccessStep 
+                onFeedbackRestartRequest={handleRestartFeedback}
+                />
+            ) : (
+                <>
+                {!feedbackType ? (
+                <FeedbackTypeStep  
+                onFeedbackTypeChanged={setFeedbackType}/>
             ) : (
                 <FeedbackContentStep 
                 feedbackType={feedbackType}
                 onFeedbackRestartRequest={handleRestartFeedback}
+                onFeedbackSent={() =>setFeedbackSent(true)}
                 />
+            )}
+                </>
             )}
 
             <footer className="text-sm text-zinc-400">

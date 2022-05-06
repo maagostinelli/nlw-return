@@ -1,10 +1,15 @@
 import { useState } from "react";
 
-import { Camera } from "phosphor-react";
+import { Camera, Trash } from "phosphor-react";
 import html2canvas from 'html2canvas';
 import { Loading } from "./Loading";
 
-export function ScreenshotButton() {
+interface ScreenshotButtonProps{
+    screenshot: string | null;
+    onScreenshotTook: ( screenshot: string | null) => void
+}
+
+export function ScreenshotButton({screenshot, onScreenshotTook}: ScreenshotButtonProps) {
     const [isTakingScreenshot, setIsTakingScreenshot] = useState(false);
 
     async function handleTakeScreenshot() {
@@ -15,7 +20,23 @@ export function ScreenshotButton() {
         //tira um print da tag html toda - ! serve para "declarar" certeza deq a tag vai ser encontrada
         //transforma a imagem do formato png para base64 (texto)
 
-        //setIsTakingScreenshot(false)
+        onScreenshotTook(base64img);
+        setIsTakingScreenshot(false)
+    }
+
+    if (screenshot) {
+        return (
+            <button
+                type="button"
+                className="p-1 w-10 h-10 rounded-md border-transparent flex justify-end items-end text-zinc-400 hover:text-zinc-100 transition-colors"
+                onClick={() => onScreenshotTook(null)}
+                style={{
+                    backgroundImage: `url(${screenshot})`,
+                }} //tag style em react é passada em um objeto
+            >
+                <Trash weight="fill"/>
+            </button>
+        );
     }
 
     return (
