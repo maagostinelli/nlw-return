@@ -1,8 +1,16 @@
 {
   "devDependencies": {
-    "prisma": "^3.13.0"
+    "@swc/core": "^1.2.181",
+    "@swc/jest": "^0.2.21",
+    "@types/jest": "^27.5.0",
+    "jest": "^28.1.0",
+    "prisma": "^3.13.0",
+    "ts-node": "^10.7.0"
   },
   "dependencies": {
     "@prisma/client": "^3.13.0"
+  },
+  "scripts": {
+    "test": "jest"
   }
 }
