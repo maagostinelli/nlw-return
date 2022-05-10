@@ -1,5 +1,5 @@
 # SOLID
-//conjunto de "regras" de programação criadas no contexto de POO
+//conjunto de princípios de programação criadas no contexto de POO
 
 1. Single Responsability Principle
     Cada classe/função deve ter responsabilidade úcica
