@@ -8,7 +8,8 @@
     "ts-node": "^10.7.0"
   },
   "dependencies": {
-    "@prisma/client": "^3.13.0"
+    "@prisma/client": "^3.13.0",
+    "expo-cli": "^5.4.3"
   },
   "scripts": {
     "test": "jest"
