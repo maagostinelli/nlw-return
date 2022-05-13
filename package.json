@@ -9,7 +9,9 @@
   },
   "dependencies": {
     "@prisma/client": "^3.13.0",
-    "expo-cli": "^5.4.3"
+    "axios": "^0.27.2",
+    "expo-cli": "^4.3.0",
+    "expo-file-system": "^14.0.0"
   },
   "scripts": {
     "test": "jest"
