@@ -4,13 +4,15 @@ import { captureScreen } from 'react-native-view-shot';
 import * as FileSystem from 'expo-file-system';
 import { ArrowLeft } from 'phosphor-react-native';
 
-import { styles } from './styles';
 import { theme } from '../../theme';
 import { feedbackTypes } from '../../utils/feedbackTypes';
+
+import { styles } from './styles';
 
 import { FeedbackType } from '../../components/Widget';
 import { ScreenshotButton } from '../../components/ScreenshotButton';
 import { Button } from '../Button';
+
 import { api } from '../../libs/api';
 
 interface Props {
@@ -20,11 +22,12 @@ interface Props {
 }
 
 export function Form({ feedbackType, onFeedbackCanceled, onFeedbackSent }: Props) {
+  const feedbackTypeInfo = feedbackTypes[feedbackType];
+
   const [isSendingFeedback, setIsSendingFeedback] = useState(false);
   const [screenshot, setScreenshot] = useState<string | null>(null);
   const [comment,setComment] = useState('');
 
-  const feedbackTypeInfo = feedbackTypes[feedbackType];
 
   function handleScreenshot() {
     captureScreen({

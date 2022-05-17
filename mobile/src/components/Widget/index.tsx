@@ -1,21 +1,22 @@
 import React, { useRef, useState } from 'react';
 import { TouchableOpacity} from 'react-native';
-import { ChatTeardropDots } from 'phosphor-react-native';
-import BottomSheet from '@gorhom/bottom-sheet';//talvez erros aqui
+
 import { gestureHandlerRootHOC } from 'react-native-gesture-handler';
+import { ChatTeardropDots } from 'phosphor-react-native';
+import BottomSheet from '@gorhom/bottom-sheet';
 
 import { Options } from '../Options';
 import { Form } from '../Form';
 import { Success } from '../Success';
-import { feedbackTypes } from '../../utils/feedbackTypes';
 
 import { styles } from './styles';
 import { theme } from '../../theme';
+import { feedbackTypes } from '../../utils/feedbackTypes';
 
 export type FeedbackType = keyof typeof feedbackTypes;
 
 function Widget() {
-  const [feedbackType, setfeedbackType] = useState<FeedbackType | null>(null);
+  const [feedbackType, setFeedbackType] = useState<FeedbackType | null>(null);
   const [feedbackSent, setFeedbackSent] = useState(false);
 
   const bottomSheetRef = useRef<BottomSheet>(null);
@@ -25,7 +26,7 @@ function Widget() {
   }
 
   function handleRestartFeedback() {
-    setfeedbackType(null);
+    setFeedbackType(null);
     setFeedbackSent(false);
   }
 
@@ -35,10 +36,7 @@ function Widget() {
 
   return (
     <>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={handleOpen}
-      >
+      <TouchableOpacity style={styles.button} onPress={handleOpen}>
         <ChatTeardropDots 
         size={24}
         weight="bold"
@@ -47,18 +45,18 @@ function Widget() {
       </TouchableOpacity>
       <BottomSheet 
         ref={bottomSheetRef}
-        snapPoints={[1, 240]}
+        snapPoints={[1, 280]}
         //tamanhos do elemento [fechado, aberto]
         backgroundStyle={styles.modal}
         handleIndicatorStyle={styles.indicator}
       >
         {
           feedbackSent 
-          ? <Success onSendAnotherFeedback={handleRestartFeedback}/>
+          ?  (<Success onSendAnotherFeedback={handleRestartFeedback}/> )
           : <>
               { feedbackType 
-                ? <Form feedbackType={feedbackType} onFeedbackCanceled={handleRestartFeedback} onFeedbackSent={handleFeedbackSent}/> 
-                : <Options onFeedbackTypeChanged={setfeedbackType} /> }
+                ? ( <Form feedbackType={feedbackType} onFeedbackCanceled={handleRestartFeedback} onFeedbackSent={handleFeedbackSent}/> )  
+                : ( <Options onFeedbackTypeChanged={setFeedbackType} /> ) }
             </>
         }
       </BottomSheet>

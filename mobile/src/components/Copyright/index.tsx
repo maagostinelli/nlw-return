@@ -7,8 +7,8 @@ export function Copyright() {
   return (
     <View>
         <Text style={styles.footerText}>
-            Feito com ♥ pela Maris
-            </Text>
+          Feito com ♥ pela Maris
+        </Text>
     </View>
   );
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, TouchableOpacityProps, Image, ImageProps, Text } from 'react-native';
+import { TouchableOpacity, TouchableOpacityProps, Image, ImageProps, Text } from 'react-native';
 
 import { styles } from './styles';
 
@@ -15,10 +15,7 @@ export function Option({ title, image, ...rest }: Props) {
       {...rest}
       //spread operator - para não precisar escrever suas outras propriedades
       >
-        <Image 
-        source={image}
-        style={styles.image}
-        />
+        <Image source={image} style={styles.image} />
         <Text style={styles.title}>{title}</Text>
     </TouchableOpacity>
   );

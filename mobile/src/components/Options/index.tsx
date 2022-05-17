@@ -4,13 +4,13 @@ import { View, Text } from 'react-native';
 import { Copyright } from '../Copyright';
 import { Option } from '../Option';
 import { FeedbackType } from '../Widget';
-import { feedbackTypes } from '../../utils/feedbackTypes'
 
+import { feedbackTypes } from '../../utils/feedbackTypes'
 import { styles } from './styles';
 
 interface Props {
   onFeedbackTypeChanged: (FeedbackType: FeedbackType) => void;
-};
+}
 
 export function Options({onFeedbackTypeChanged}: Props) {
   return (

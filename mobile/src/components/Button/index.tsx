@@ -12,10 +12,10 @@ export function Button({ isLoading, ...rest }: Props) {
   return (
     <TouchableOpacity style={styles.container} {...rest}>
         {isLoading 
-            ? <ActivityIndicator
+            ? ( <ActivityIndicator
                 color={theme.colors.text_on_brand_color}
-            /> 
-            : <Text style={styles.title}>Enviar</Text>
+            /> )
+            : ( <Text style={styles.title}>Enviar</Text> )
         }
     </TouchableOpacity>
   );
