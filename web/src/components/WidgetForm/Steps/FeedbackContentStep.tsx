@@ -1,7 +1,9 @@
 import { ArrowLeft } from "phosphor-react";
 import { FormEvent, useState } from "react";
 import { FeedbackType, feedbackTypes } from ".."
+import { api } from "../../../lib/api";
 import { CloseButton } from "../../CloseButton"
+import { Loading } from "../Loading";
 import { ScreenshotButton } from "../ScreenshotButton";
 
 interface FeedbackContentStepProps {
@@ -14,14 +16,27 @@ export function FeedbackContentStep(props: FeedbackContentStepProps) {
 
     const [screenshot, setScreenshot] = useState< string | null >(null); //<recebe string ou nulo>
     const [comment, setComment] = useState('');
+    const [isSendingFeedback, setIsSendingFeedback] = useState(false);
     const feedbackTypeInfo = feedbackTypes[props.feedbackType];
 
-    function handleSubmitFeedback(event: FormEvent) {
+    async function handleSubmitFeedback(event: FormEvent) {
         event.preventDefault();
+
+        /*
         console.log({
             screenshot,
             comment
         })
+         */
+
+        setIsSendingFeedback(true)
+        await api.post('/feedbacks', {
+            type: props.feedbackType,
+            comment,
+            screenshot,
+        })
+
+        setIsSendingFeedback(false)
         props.onFeedbackSent()
     } //previne onSubmit dar refresh na pag por defaul
 
@@ -55,10 +70,10 @@ export function FeedbackContentStep(props: FeedbackContentStepProps) {
                 />
                 <button
                     type="submit"
-                    disabled={comment.length === 0 && screenshot === null}
+                    disabled={comment.length === 0 && screenshot === null || isSendingFeedback}
                     className="p-2 flex flex-1 justify-center items-center rounded-md bg-brand-500 hover:bg-brand-300 transition-colors text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-darkSurfacePrimary-500 focus:ring-brand-500 disabled:opacity-40 disabled:hover:bg-brand-500"
                 >
-                    Enviar feedback
+                    {isSendingFeedback ? <Loading /> :'Enviar feedback'}
                 </button>
             </footer>
         </form>
