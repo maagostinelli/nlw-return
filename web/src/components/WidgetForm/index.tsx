@@ -74,7 +74,7 @@ export function WidgetForm() {
             )}
 
             <footer className="text-sm text-zinc-400">
-                Feito com ♥ pela <a className="underline underline-offset-1" href="">Maris</a>
+                Feito com ♥ pela <a className="underline underline-offset-1" href="https://github.com/maagostinelli">Maris</a>
             </footer>
         </div>
     );
